@@ -1,4 +1,4 @@
-class FoldersController < ApplicationController
+class Api::V1::FoldersController < ApplicationController
   before_action :set_folder, only: [:show, :update, :destroy]
 
   # GET /folders
@@ -13,12 +13,20 @@ class FoldersController < ApplicationController
     render json: @folder
   end
 
+  # GET /folder/user/:user_id
+  def users_folders
+    @user = User.find(params[:user_id])
+    
+    folders = @user.folders
+    render json: folders 
+  end
+
   # POST /folders
   def create
     @folder = Folder.new(folder_params)
-
+    
     if @folder.save
-      render json: @folder, status: :created, location: @folder
+      render json: @folder, status: :created
     else
       render json: @folder.errors, status: :unprocessable_entity
     end
@@ -35,7 +43,11 @@ class FoldersController < ApplicationController
 
   # DELETE /folders/1
   def destroy
-    @folder.destroy
+    if @folder.destroy
+      render json: params[:folder_id]
+    else 
+      render json: {error: "There Was An Error. Attempt: Destroy Folder."}
+    end
   end
 
   private

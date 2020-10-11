@@ -1,4 +1,4 @@
-class ExercisesController < ApplicationController
+class Api::V1::ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :update, :destroy]
 
   # GET /exercises
@@ -18,7 +18,7 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.new(exercise_params)
 
     if @exercise.save
-      render json: @exercise, status: :created, location: @exercise
+      render json: @exercise, status: :created
     else
       render json: @exercise.errors, status: :unprocessable_entity
     end

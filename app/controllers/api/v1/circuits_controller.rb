@@ -1,4 +1,4 @@
-class CircuitsController < ApplicationController
+class Api::V1::CircuitsController < ApplicationController
   before_action :set_circuit, only: [:show, :update, :destroy]
 
   # GET /circuits
@@ -18,7 +18,7 @@ class CircuitsController < ApplicationController
     @circuit = Circuit.new(circuit_params)
 
     if @circuit.save
-      render json: @circuit, status: :created, location: @circuit
+      render json: @circuit, status: :created
     else
       render json: @circuit.errors, status: :unprocessable_entity
     end

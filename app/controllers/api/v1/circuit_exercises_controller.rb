@@ -1,4 +1,4 @@
-class CircuitExercisesController < ApplicationController
+class Api::V1::CircuitExercisesController < ApplicationController
   before_action :set_circuit_exercise, only: [:show, :update, :destroy]
 
   # GET /circuit_exercises
@@ -18,7 +18,7 @@ class CircuitExercisesController < ApplicationController
     @circuit_exercise = CircuitExercise.new(circuit_exercise_params)
 
     if @circuit_exercise.save
-      render json: @circuit_exercise, status: :created, location: @circuit_exercise
+      render json: @circuit_exercise, status: :created
     else
       render json: @circuit_exercise.errors, status: :unprocessable_entity
     end

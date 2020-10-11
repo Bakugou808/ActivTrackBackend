@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class Api::V1::SessionsController < ApplicationController
   before_action :set_session, only: [:show, :update, :destroy]
 
   # GET /sessions
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     @session = Session.new(session_params)
 
     if @session.save
-      render json: @session, status: :created, location: @session
+      render json: @session, status: :created
     else
       render json: @session.errors, status: :unprocessable_entity
     end
