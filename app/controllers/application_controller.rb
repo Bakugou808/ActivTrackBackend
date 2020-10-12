@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
     end
   
     def current_user
+      
       @user ||= User.find(self.user_id)
     end
   
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::API
   
     def decoded_token
       begin
-        JWT.decode(token, ENV['SECRET'], true, { alg: ENV['ALG'] })
+        JWT.decode(self.token, ENV['SECRET'], true, { alg: ENV['ALG'] })
       rescue JWT::DecodeError
         [ { error: 'invalid token' } ]
       end
