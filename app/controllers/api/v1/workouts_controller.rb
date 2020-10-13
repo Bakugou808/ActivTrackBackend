@@ -1,4 +1,4 @@
-class WorkoutsController < ApplicationController
+class Api::V1::WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :update, :destroy]
 
   # GET /workouts
@@ -18,7 +18,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.new(workout_params)
 
     if @workout.save
-      render json: @workout, status: :created, location: @workout
+      render json: @workout, status: :created
     else
       render json: @workout.errors, status: :unprocessable_entity
     end

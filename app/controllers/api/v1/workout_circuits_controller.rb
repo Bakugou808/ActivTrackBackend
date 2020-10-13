@@ -1,4 +1,4 @@
-class WorkoutCircuitsController < ApplicationController
+class Api::V1::WorkoutCircuitsController < ApplicationController
   before_action :set_workout_circuit, only: [:show, :update, :destroy]
 
   # GET /workout_circuits
@@ -18,7 +18,7 @@ class WorkoutCircuitsController < ApplicationController
     @workout_circuit = WorkoutCircuit.new(workout_circuit_params)
 
     if @workout_circuit.save
-      render json: @workout_circuit, status: :created, location: @workout_circuit
+      render json: @workout_circuit, status: :created
     else
       render json: @workout_circuit.errors, status: :unprocessable_entity
     end

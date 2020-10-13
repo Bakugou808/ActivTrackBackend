@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :circuits, only: %i[create update destroy]
       resources :workouts
       resources :folders
+      get '/folders/user/:user_id', to: 'folders#users_folders'
     end
   end
 
