@@ -20,7 +20,7 @@ class Api::V1::CircuitExercisesController < ApplicationController
     if @circuit_exercise.save
       render json: @circuit_exercise, status: :created
     else
-      render json: @circuit_exercise.errors, status: :unprocessable_entity
+      render json: {error: @circuit_exercise.errors}, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +29,7 @@ class Api::V1::CircuitExercisesController < ApplicationController
     if @circuit_exercise.update(circuit_exercise_params)
       render json: @circuit_exercise
     else
-      render json: @circuit_exercise.errors, status: :unprocessable_entity
+      render json: {error: @circuit_exercise.errors}, status: :unprocessable_entity
     end
   end
 
@@ -46,6 +46,6 @@ class Api::V1::CircuitExercisesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def circuit_exercise_params
-      params.require(:circuit_exercise).permit(:circuit_id, :exercise_id, :position, :attributes)
+      params.require(:circuit_exercise).permit(:circuit_id, :exercise_id, :position, ex_attributes: {})
     end
 end

@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_215550) do
     t.bigint "circuit_id", null: false
     t.bigint "exercise_id", null: false
     t.integer "position"
-    t.string "attributes"
+    t.string "ex_attributes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["circuit_id"], name: "index_circuit_exercises_on_circuit_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_215550) do
   create_table "circuits", force: :cascade do |t|
     t.string "phase"
     t.integer "position"
-    t.string "type"
+    t.string "circuit_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

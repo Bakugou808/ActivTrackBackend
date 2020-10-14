@@ -4,7 +4,7 @@ class CreateCircuitExercises < ActiveRecord::Migration[6.0]
       t.references :circuit, null: false, foreign_key: true
       t.references :exercise, null: false, foreign_key: true
       t.integer :position
-      t.string :attributes
+      t.string :ex_attributes
 
       t.timestamps
     end
