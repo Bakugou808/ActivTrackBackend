@@ -14,7 +14,6 @@ class Api::V1::WorkoutsController < ApplicationController
   end
 
   def format_workout
-    # byebug
     workout = Workout.find(params[:workout_id])
     formatted = workout.formatted_workout
     render json: formatted

@@ -4,17 +4,18 @@ require 'json'
 module Workouts 
     class Circuits 
         CIRUIT_EXERCISES_BY_PHASE_SQL = <<~SQL.squish 
-            select 
-                w.id as workout_id,
+        select 
                 c.phase as circuit_phase,
-                c.position as circuit_position,
                 c.circuit_type as circuit_type,
+                c.position as phase_position,
+                ce.position as circuit_position,
                 c.sets as circuit_sets,
-                ce.id as circuit_exercise_id,
-                ce.position as circuit_exercise_position,
-                ce.ex_attributes as circuit_exercise_attributes,
                 e.exercise_name as ex_name, 
-                e.description as ex_description
+                ce.ex_attributes as circuit_exercise_attributes,
+                e.description as ex_description,
+                w.id as workout_id,
+                c.id as circuit_id,
+                ce.id as circuit_exercise_id
             from workouts w
             inner join workout_circuits wc
                 on wc.workout_id = w.id
