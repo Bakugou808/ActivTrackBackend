@@ -1,5 +1,5 @@
 class Api::V1::WorkoutsController < ApplicationController
-  before_action :set_workout, only: [:show, :update, :destroy]
+  before_action :set_workout, only: [:show, :formatWorkout, :update, :destroy]
 
   # GET /workouts
   def index
@@ -11,6 +11,13 @@ class Api::V1::WorkoutsController < ApplicationController
   # GET /workouts/1
   def show
     render json: @workout
+  end
+
+  def format_workout
+    # byebug
+    workout = Workout.find(params[:workout_id])
+    formatted = workout.formatted_workout
+    render json: formatted
   end
 
   # POST /workouts
