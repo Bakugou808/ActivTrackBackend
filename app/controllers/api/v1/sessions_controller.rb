@@ -16,11 +16,10 @@ class Api::V1::SessionsController < ApplicationController
   # POST /sessions
   def create
     @session = Session.new(session_params)
-
     if @session.save
       render json: @session, status: :created
     else
-      render json: @session.errors, status: :unprocessable_entity
+      render json: {error: @session.errors}, status: :unprocessable_entity
     end
   end
 
@@ -46,6 +45,6 @@ class Api::V1::SessionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def session_params
-      params.require(:session).permit(:Workout_id, :count, :active_time, :rest_time, :total_time)
+      params.require(:session).permit(:workout_id, :count, :active_time, :rest_time, :total_time)
     end
 end

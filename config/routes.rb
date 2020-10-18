@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :workouts
       resources :folders
       get '/folders/user/:user_id', to: 'folders#users_folders'
+      get '/formatted_workout/:workout_id', to: 'workouts#format_workout'
     end
   end
 
