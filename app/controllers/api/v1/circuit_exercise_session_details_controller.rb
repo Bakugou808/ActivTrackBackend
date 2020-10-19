@@ -15,8 +15,9 @@ class Api::V1::CircuitExerciseSessionDetailsController < ApplicationController
 
   # POST /circuit_exercise_session_details
   def create
+    
     @circuit_exercise_session_detail = CircuitExerciseSessionDetail.new(circuit_exercise_session_detail_params)
-    byebug
+    
     if @circuit_exercise_session_detail.save
       render json: @circuit_exercise_session_detail, status: :created
     else

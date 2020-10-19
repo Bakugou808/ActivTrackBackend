@@ -1,0 +1,32 @@
+select c.phase as circuit_phase,
+                c.sets as circuit_sets,
+                c.position as circuit_position,
+                c.circuit_type as circuit_type,
+                ce.position as circuit_exercise_position,
+                ce.ex_attributes as circuit_exercise_attributes,
+                e.exercise_name as ex_name, 
+                e.description as ex_description
+            from workouts w
+            inner join workout_circuits wc
+                on wc.workout_id = w.id
+            inner join circuits c 
+                on c.id = wc.circuit_id
+            inner join circuit_exercises ce
+                on ce.circuit_id = c.id
+            inner join exercises e 
+                on e.id = ce.exercise_id
+            where w.id = 1 
+                and c.phase = 'Warm Up' ;
+
+
+                select count(*)
+            from workouts w
+            inner join workout_circuits wc
+                on wc.workout_id = w.id
+            inner join circuits c 
+                on c.id = wc.circuit_id
+            inner join circuit_exercises ce
+                on ce.circuit_id = c.id
+            inner join exercises e 
+                on e.id = ce.exercise_id ;
+           
