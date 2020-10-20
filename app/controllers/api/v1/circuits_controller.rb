@@ -16,7 +16,7 @@ class Api::V1::CircuitsController < ApplicationController
   # POST /circuits
   def create
     @circuit = Circuit.new(circuit_params)
- 
+    
     if @circuit.save
       render json: @circuit, status: :created
     else
@@ -46,6 +46,6 @@ class Api::V1::CircuitsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def circuit_params
-      params.require(:circuit).permit(:phase, :position, :circuit_type)
+      params.require(:circuit).permit(:phase, :sets, :position, :circuit_type)
     end
 end
