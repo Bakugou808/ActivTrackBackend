@@ -7,12 +7,12 @@ class Workout < ApplicationRecord
 
   def formatted_workout
     
+    
     warmup = formatData(self.warmup.sort_by! {|hash| hash["phase_position"]})
     body = formatData(self.body.sort_by! {|hash| hash["phase_position"]})
     cool_down = formatData(self.cool_down.sort_by! {|hash| hash["phase_position"]})
     
     workout = {warmup: warmup, body: body, cool_down: cool_down}
-    
     workout
   end
 
@@ -35,9 +35,10 @@ class Workout < ApplicationRecord
     circuit_arr = [] 
     sorted_objs = []
     circ_arr_phase_pos = 0    
-
+    
     data.each do |record| 
       puts record
+      
       if record["circuit_type"] == "circuit" && record["circuit_position"] == 1 && circuit_arr.length == 0
         circuit_arr.push(record)
         circ_arr_phase_pos = record["phase_position"]
@@ -54,7 +55,7 @@ class Workout < ApplicationRecord
           circuit_arr.sort_by! {|hash| hash["circuit_position"]}
           sorted_objs.push({circ_arr_phase_pos => circuit_arr})
           circ_arr_phase_pos = 0
-          circuitArr = []
+          circuit_arr = []
         end
         sorted_objs.push({record["phase_position"] => [record]})
       end

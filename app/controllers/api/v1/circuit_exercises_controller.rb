@@ -26,6 +26,7 @@ class Api::V1::CircuitExercisesController < ApplicationController
 
   # PATCH/PUT /circuit_exercises/1
   def update
+    
     if @circuit_exercise.update(circuit_exercise_params)
       render json: @circuit_exercise
     else
