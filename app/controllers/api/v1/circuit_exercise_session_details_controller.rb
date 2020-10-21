@@ -27,7 +27,6 @@ class Api::V1::CircuitExerciseSessionDetailsController < ApplicationController
 
   # PATCH/PUT /circuit_exercise_session_details/1
   def update
-    byebug
     if @circuit_exercise_session_detail.update(circuit_exercise_session_detail_params)
       render json: @circuit_exercise_session_detail
     else
@@ -48,6 +47,6 @@ class Api::V1::CircuitExerciseSessionDetailsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def circuit_exercise_session_detail_params
-      params.require(:circuit_exercise_session_detail).permit(:session_id, :sets, :circuit_exercise_id, :stats)
+      params.require(:circuit_exercise_session_detail).permit(:session_id, :circuit_exercise_id, stats: {})
     end
 end

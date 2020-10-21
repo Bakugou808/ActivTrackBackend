@@ -1,0 +1,62 @@
+select  
+               
+                
+               
+                sess_details.id as circuit_exercise_session_details_id,
+                c_e.id as circuit_exercise_id,
+                c_e.circuit_id as circuit_id, 
+                sess_details.stats as circuit_exercise_session_details_stats,
+                e.exercise_name as exercise_name
+
+            from sessions s 
+            inner join circuit_exercise_session_details sess_details
+                on sess_details.session_id = s.id 
+            inner join circuit_exercises c_e
+                on c_e.id = sess_details.id
+            inner join exercises e
+                on e.id= c_e.exercise_id 
+            where s.workout_id = 1;
+
+
+---------------
+
+
+ select  
+    cesd.stats as circuit_exercises_session_details_stats,
+    e.exercise_name as exercise_name
+    from sessions s 
+    inner join circuit_exercise_session_details cesd
+        on cesd.session_id = s.id 
+    inner join circuit_exercises ce
+        on ce.id = cesd.circuit_exercise_id
+    inner join exercises e
+        on e.id= ce.exercise_id 
+    where s.workout_id = 1;
+
+
+                select  
+                s.workout_id as workout_id,
+                s.id as session_id, 
+                s.created_at as session_date,
+                cesd.id as circuit_exercises_session_details_id,
+                ce.id as circuit_exercise_id, 
+                ce.circuit_id as circuit_id, 
+                cesd.stats as circuit_exercises_session_details_stats,
+                e.id as exercise_id, 
+                e.exercise_name as exercise_name
+            from sessions s 
+            inner join circuit_exercise_session_details cesd
+                on cesd.session_id = s.id 
+            inner join circuit_exercises ce
+                on ce.id = cesd.circuit_exercise_id
+            inner join exercises e
+                on e.id = ce.exercise_id 
+            where s.workout_id = 1
+            group by s.id;
+
+
+            cesd_ex_group.pluck(:reps)
+
+
+            [{ name: {first:"David"} }, { name: {first:"Rafael"} }, { name: {first:"Aaron"} }].pluck(:name).pluck(:first)
+Sessions::Details.new(1)

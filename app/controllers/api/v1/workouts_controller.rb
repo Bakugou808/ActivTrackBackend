@@ -12,11 +12,20 @@ class Api::V1::WorkoutsController < ApplicationController
   def show
     render json: @workout
   end
-
+  
+  # '/formatted_workout/:workout_id'
   def format_workout
     workout = Workout.find(params[:workout_id])
     formatted = workout.formatted_workout
     render json: formatted
+  end
+
+  # '/workouts_stats/:workout_id'
+  def workouts_stats 
+    byebug
+    workout = Workout.find(params[:workout_id])
+    stats = workout.grab_session_details(params[:num_of_sessions]) 
+    render json: stats
   end
 
   # POST /workouts
