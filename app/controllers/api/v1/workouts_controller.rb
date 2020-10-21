@@ -22,10 +22,10 @@ class Api::V1::WorkoutsController < ApplicationController
 
   # '/workouts_stats/:workout_id'
   def workouts_stats 
-    byebug
-    workout = Workout.find(params[:workout_id])
-    stats = workout.grab_session_details(params[:num_of_sessions]) 
-    render json: stats
+    workout = Workout.find(params[:workout_id].to_i)
+    stats = workout.grab_session_details(params[:num_of_sessions].to_i) 
+    
+    render json: {stats: stats}
   end
 
   # POST /workouts
