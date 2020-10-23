@@ -35,7 +35,6 @@ class Api::V1::CircuitsController < ApplicationController
 
   # DELETE /circuits/1
   def destroy
-    debugger
     @circuit.destroy
     render json: {message: "circuit destroyed"}
   end
