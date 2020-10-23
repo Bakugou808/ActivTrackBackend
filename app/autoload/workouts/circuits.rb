@@ -10,6 +10,7 @@ module Workouts
                 c.position as phase_position,
                 ce.position as circuit_position,
                 c.sets as circuit_sets,
+                e.id as ex_id,
                 e.exercise_name as ex_name, 
                 ce.ex_attributes as circuit_exercise_attributes,
                 e.description as ex_description,
