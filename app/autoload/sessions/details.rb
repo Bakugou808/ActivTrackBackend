@@ -37,17 +37,19 @@ module Sessions
             number_of_records(amount).each do |session| 
                 # this is a group of cesd records
                 
+                session_id = session[1][0]['session_id']
                 group_by_exercise(session[1]).each do |_key, cesd_ex_group|
-                   
                     name = cesd_ex_group.first['exercise_name']
-                    
+                    workout_id = cesd_ex_group.first['workout_id']
+                    workout_title = Workout.find(workout_id).title
                    reps = aggregate(cesd_ex_group.pluck('circuit_exercises_session_details_stats').pluck('reps'))
                    aT = aggregate(cesd_ex_group.pluck('circuit_exercises_session_details_stats').pluck('activeTime'))
                    rP = aggregate(cesd_ex_group.pluck('circuit_exercises_session_details_stats').pluck('restPeriod'))
                    atts = cesd_ex_group.pluck('circuit_exercises_session_details_stats')
 
-                   dataHash = {exercise_name: name, aggregate_reps: reps, total_active_time: aT, total_rest_time: rP, set_att_data: atts, total_time: (aT + rP)} 
-                    dataArr << dataHash
+                   dataHash = {workout_title: workout_title, workout_id: workout_id, exercise_name: name, aggregate_reps: reps, total_active_time: aT, total_rest_time: rP, set_att_data: atts, total_time: (aT + rP), session_id: session_id } 
+                    
+                   dataArr << dataHash
                 end
             end
             dataArr
