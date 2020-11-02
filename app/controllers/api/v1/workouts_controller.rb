@@ -20,10 +20,25 @@ class Api::V1::WorkoutsController < ApplicationController
     render json: formatted
   end
 
+  # '/workouts_stats/:user_id'
+  def all_workouts_with_stats 
+    user = User.find(params[:user_id])
+    workouts = user.workouts 
+    data = Workout.grab_all_workouts_with_session_details(workouts)
+    render json: {data: data}
+
+  end
+
   # '/workouts_stats/:workout_id'
   def workouts_stats 
     workout = Workout.find(params[:workout_id].to_i)
-    stats = workout.grab_session_details(params[:num_of_sessions].to_i) 
+    
+    stats = nil
+    if params[:num_of_sessions].to_i == 0
+      stats = workout.grab_session_details(nil)
+    else
+      stats = workout.grab_session_details(params[:num_of_sessions].to_i) 
+    end
     
     render json: {stats: stats}
   end

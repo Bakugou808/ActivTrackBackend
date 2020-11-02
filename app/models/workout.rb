@@ -5,8 +5,30 @@ class Workout < ApplicationRecord
   has_many :circuits, through: :workout_circuits
 
 
+  def self.grab_all_workouts_with_session_details(workouts)
+    workout_ids = workouts.map{|workout| workout.id}
+    data = workout_ids.map{|workout_id| ::Sessions::Details.new(workout_id).format_data(nil)}.reject{|d| d.empty?}
+    result = []
+    data.map{|workSess| 
+      
+      sessHash = {}
+      workSess.map{|detail| 
+        
+        if sessHash[detail[:session_id]]
+          sessHash[detail[:session_id]].push(detail)
+        else 
+          sessHash[detail[:session_id]] = [detail]
+        end
+      }
+      workoutSessions = {workSess[0][:workout_title] => sessHash}
+      result << workoutSessions
+    }
+    result
+  end 
+
   def grab_session_details(amount = nil) 
-    ::Sessions::Details.new(self.id).format_data(amount)
+    data = ::Sessions::Details.new(self.id).format_data(amount)
+    
   end
 
   def formatted_workout
