@@ -12,11 +12,20 @@ class Api::V1::WorkoutsController < ApplicationController
   def show
     render json: @workout
   end
-
+  
+  # '/formatted_workout/:workout_id'
   def format_workout
     workout = Workout.find(params[:workout_id])
     formatted = workout.formatted_workout
     render json: formatted
+  end
+
+  # '/workouts_stats/:workout_id'
+  def workouts_stats 
+    workout = Workout.find(params[:workout_id].to_i)
+    stats = workout.grab_session_details(params[:num_of_sessions].to_i) 
+    
+    render json: {stats: stats}
   end
 
   # POST /workouts
@@ -32,6 +41,7 @@ class Api::V1::WorkoutsController < ApplicationController
 
   # PATCH/PUT /workouts/1
   def update
+    
     if @workout.update(workout_params)
       render json: @workout
     else
@@ -41,7 +51,11 @@ class Api::V1::WorkoutsController < ApplicationController
 
   # DELETE /workouts/1
   def destroy
-    @workout.destroy
+    if @workout.destroy
+      render json: params[:id]
+    else 
+      render json: {error: "There Was An Error. Attempt: Destroy Folder."}
+    end
   end
 
   private

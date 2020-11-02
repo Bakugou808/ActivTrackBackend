@@ -5,9 +5,11 @@ class Workout < ApplicationRecord
   has_many :circuits, through: :workout_circuits
 
 
+  def grab_session_details(amount = nil) 
+    ::Sessions::Details.new(self.id).format_data(amount)
+  end
+
   def formatted_workout
-    
-    
     warmup = formatData(self.warmup.sort_by! {|hash| hash["phase_position"]})
     body = formatData(self.body.sort_by! {|hash| hash["phase_position"]})
     cool_down = formatData(self.cool_down.sort_by! {|hash| hash["phase_position"]})
@@ -16,6 +18,8 @@ class Workout < ApplicationRecord
     workout
   end
 
+
+  
   
   def warmup
     ::Workouts::Circuits.new(self.id).find_by_phase('Warm Up')

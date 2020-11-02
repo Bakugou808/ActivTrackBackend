@@ -15,7 +15,9 @@ class Api::V1::ExercisesController < ApplicationController
 
   # POST /exercises
   def create
-    @exercise = Exercise.new(exercise_params)
+    
+    @exercise = Exercise.find_or_create_by(exercise_name: exercise_params['exercise_name'])
+    # Exercise.new(exercise_params)
 
     if @exercise.save
       render json: @exercise, status: :created
