@@ -41,6 +41,7 @@ class Api::V1::WorkoutsController < ApplicationController
 
   # PATCH/PUT /workouts/1
   def update
+    
     if @workout.update(workout_params)
       render json: @workout
     else
@@ -50,7 +51,11 @@ class Api::V1::WorkoutsController < ApplicationController
 
   # DELETE /workouts/1
   def destroy
-    @workout.destroy
+    if @workout.destroy
+      render json: params[:id]
+    else 
+      render json: {error: "There Was An Error. Attempt: Destroy Folder."}
+    end
   end
 
   private
