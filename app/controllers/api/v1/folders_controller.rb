@@ -44,7 +44,7 @@ class Api::V1::FoldersController < ApplicationController
   # DELETE /folders/1
   def destroy
     if @folder.destroy
-      render json: params[:folder_id]
+      render json: params[:id]
     else 
       render json: {error: "There Was An Error. Attempt: Destroy Folder."}
     end
