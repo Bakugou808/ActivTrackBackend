@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       get '/formatted_workout/:workout_id', to: 'workouts#format_workout'
       get '/workouts_stats/:workout_id/:num_of_sessions', to: 'workouts#workouts_stats'
       get '/all_workouts_with_stats/:user_id', to: 'workouts#all_workouts_with_stats'
-
+      get '/workouts_stats_by_date/:workout_id/:start_date/:end_date', to: 'workouts#workouts_stats_by_date'
     end
   end
 

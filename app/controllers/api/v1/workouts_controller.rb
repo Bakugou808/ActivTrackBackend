@@ -35,12 +35,22 @@ class Api::V1::WorkoutsController < ApplicationController
     
     stats = nil
     if params[:num_of_sessions].to_i == 0
-      stats = workout.grab_session_details(nil)
+      stats = workout.grab_session_details_by_exercise(nil)
     else
-      stats = workout.grab_session_details(params[:num_of_sessions].to_i) 
+      stats = workout.grab_session_details_by_exercise(params[:num_of_sessions].to_i) 
     end
     
     render json: {stats: stats}
+  end
+
+  # '/workouts_stats_by_date/:workout_id/:start_date/:end_date'
+  def workouts_stats_by_date 
+    workout = Workout.find(params[:workout_id].to_i)
+    
+    stats = workout.grab_session_details_by_date(params[:start_date], params[:end_date])
+    byebug
+    render json: {stats: stats}
+
   end
 
   # POST /workouts
