@@ -29,8 +29,22 @@ class Api::V1::WorkoutsController < ApplicationController
 
   end
 
-  # '/workouts_stats/:workout_id'
-  def workouts_stats 
+  # '/workouts_stats_by_total_reps/:workout_id/:num_of_sessions'
+  def workouts_stats_by_total_reps 
+    workout = Workout.find(params[:workout_id].to_i)
+    
+    stats = nil
+    if params[:num_of_sessions].to_i == 0
+      stats = workout.grab_session_details_by_total_reps(nil)
+    else
+      stats = workout.grab_session_details_by_total_reps(params[:num_of_sessions].to_i) 
+    end
+    
+    render json: {stats: stats}
+  end
+
+  # '/workouts_stats_by_ex/:workout_id/:num_of_sessions'
+  def workouts_stats_by_ex 
     workout = Workout.find(params[:workout_id].to_i)
     
     stats = nil

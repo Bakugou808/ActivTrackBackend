@@ -26,19 +26,17 @@ class Workout < ApplicationRecord
     
   end 
 
-  def grab_session_details(amount = nil) 
+  def grab_session_details_by_total_reps(amount = nil) 
     data = ::Sessions::Details.new(self.id).format_data(amount)
     
   end
 
   def grab_session_details_by_date(start_date, end_date)
-    byebug
     data = ::Sessions::Details.new(self.id, start_date, end_date).format_data_by_dates
 
   end
 
   def grab_session_details_by_exercise(amount)
-    byebug
     data = ::Sessions::Details.new(self.id).format_data_by_exercise(amount)
 
   end

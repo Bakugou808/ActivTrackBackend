@@ -21,7 +21,8 @@ Rails.application.routes.draw do
       resources :folders
       get '/folders/user/:user_id', to: 'folders#users_folders'
       get '/formatted_workout/:workout_id', to: 'workouts#format_workout'
-      get '/workouts_stats/:workout_id/:num_of_sessions', to: 'workouts#workouts_stats'
+      get '/workouts_stats_by_total_reps/:workout_id/:num_of_sessions', to: 'workouts#workouts_stats_by_total_reps'
+      get '/workouts_stats_by_ex/:workout_id/:num_of_sessions', to: 'workouts#workouts_stats_by_ex'
       get '/all_workouts_with_stats/:user_id', to: 'workouts#all_workouts_with_stats'
       get '/workouts_stats_by_date/:workout_id/:start_date/:end_date', to: 'workouts#workouts_stats_by_date'
     end
