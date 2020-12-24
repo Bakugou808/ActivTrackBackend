@@ -37,6 +37,7 @@ class Api::V1::CircuitExercisesController < ApplicationController
   # DELETE /circuit_exercises/1
   def destroy
     @circuit_exercise.destroy
+    render json: {message: 'circuit exercise destroyed'}
   end
 
   private

@@ -35,8 +35,12 @@ class Api::V1::CircuitsController < ApplicationController
 
   # DELETE /circuits/1
   def destroy
-    @circuit.destroy
-    render json: {message: "circuit destroyed"}
+    workoutIds = @circuit.workouts.map{|workout| workout.id } 
+    if @circuit.destroy 
+      workouts = workoutIds.map{|id| Workout.find(id)}
+      workouts.each { |workout| workout.handleCircuitDeletion}
+      render json: {message: "circuit destroyed"}
+    end
   end
 
   private
