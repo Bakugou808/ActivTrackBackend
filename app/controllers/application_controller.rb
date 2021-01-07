@@ -22,7 +22,9 @@ class ApplicationController < ActionController::API
     end
   
     def user_id
+      if decoded_token
       self.decoded_token.first['user_id']
+      end
     end
   
     def logged_in?
